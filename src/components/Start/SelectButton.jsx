@@ -1,14 +1,25 @@
 import { css } from '@emotion/react';
+import { useState } from 'react';
+import Howto from './Howto';
 export default function SelectButton() {
+  const [openModal, setOpneModal] = useState(false);
+  const handleOpenModal = () => {
+    setOpneModal((prevcount) => {
+      return !prevcount;
+    });
+  };
   return (
-    <div css={buttonArea}>
-      <div css={wrap}>
-        <button>スタート</button>
+    <>
+      <div css={buttonArea}>
+        <div css={wrap}>
+          <button>スタート</button>
+        </div>
+        <div css={[wrap, margin]}>
+          <button onClick={handleOpenModal}>あそびかた</button>
+        </div>
       </div>
-      <div css={[wrap, margin]}>
-        <button>あそびかた</button>
-      </div>
-    </div>
+      {openModal ? <Howto /> : <></>}
+    </>
   );
 }
 
