@@ -3,6 +3,7 @@ import { playScreen } from '../../App';
 
 export default function StartButton({ buttonStyle }) {
   const [, setState] = useContext(playScreen);
+  // ゲーム画面表示の更新
   const handle = () => {
     setState('play');
   };

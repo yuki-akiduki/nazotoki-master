@@ -6,6 +6,7 @@ import Play from './components/play/Play';
 export const playScreen = createContext('start');
 
 function App() {
+  // useStateで画面の出し分け処理
   const [playState, setPlayState] = useState('start');
   return (
     <>

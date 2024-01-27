@@ -8,6 +8,7 @@ export default function Ready() {
   const [, setGameState] = useContext(gameStatus);
 
   useEffect(() => {
+    // イントロの演出処理
     const showInto = async () => {
       await new Promise((resolve) => setTimeout(resolve, 2000));
       setShowReady(false);

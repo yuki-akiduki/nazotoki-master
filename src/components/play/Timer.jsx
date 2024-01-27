@@ -5,9 +5,10 @@ export default function Timer() {
   const [isRunning, setIsRunning] = useState(true);
 
   useEffect(() => {
+    // タイマー処理
     let intervalId;
     const startTime = Date.now();
-
+    // イントロ演出終了後にタイマースタート
     if (isRunning) {
       intervalId = setInterval(() => {
         const date = new Date(Date.now() - startTime);

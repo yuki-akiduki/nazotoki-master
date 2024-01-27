@@ -6,6 +6,8 @@ import StartButton from './StartButton';
 
 export default function SelectButton() {
   const [openModal, setOpneModal] = useState(false);
+
+  // モーダルを開く処理
   const handleOpenModal = () => {
     setOpneModal((prevcount) => {
       return !prevcount;

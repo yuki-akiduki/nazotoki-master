@@ -5,6 +5,7 @@ import Game from './Game';
 export const gameStatus = createContext(false);
 
 export default function Play() {
+  // イントロとゲーム画面をuseCoxntextで管理
   const [gameState, setGameState] = useState(false);
   return (
     <>
