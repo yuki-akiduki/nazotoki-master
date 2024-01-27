@@ -1,12 +1,34 @@
 import { css, Global } from '@emotion/react';
 import Start from './components/Start/Start';
 import Layout from './layout/Layout';
+import { useState, createContext } from 'react';
+import Play from './components/play/Play';
+export const playScreen = createContext('start');
+
 function App() {
+  const [playState, setPlayState] = useState('start');
   return (
     <>
       <Global styles={globalStyle} />
       <Layout>
-        <Start />
+        <playScreen.Provider value={[playState, setPlayState]}>
+          {playState === 'start' ? (
+            <>
+              <Start />
+            </>
+          ) : playState === 'play' ? (
+            <>
+              <Play />
+            </>
+          ) : (
+            playState ===
+            'result'(
+              <>
+                <p>結果</p>
+              </>,
+            )
+          )}
+        </playScreen.Provider>
       </Layout>
     </>
   );

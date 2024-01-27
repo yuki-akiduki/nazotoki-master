@@ -19,4 +19,5 @@ const container = css`
   max-width: 1080px;
   margin-left: auto;
   margin-right: auto;
+  height: 100%;
 `;

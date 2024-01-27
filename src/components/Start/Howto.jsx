@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import StartButton from './StartButton';
 
 export default function Howto() {
   return (
@@ -13,6 +14,10 @@ export default function Howto() {
           </p>
           <p>答えが「1」の場合→「いち」</p>
           <p>答えが「CAKE」の場合→「けーき」</p>
+
+          <div>
+            <StartButton />
+          </div>
         </div>
       </div>
     </div>
