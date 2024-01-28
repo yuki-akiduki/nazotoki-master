@@ -8,28 +8,21 @@ export const playScreen = createContext('start');
 function App() {
   // useStateで画面の出し分け処理
   const [playState, setPlayState] = useState('start');
+  const screen = (State) => {
+    switch (State) {
+      case 'start':
+        return <Start />;
+      case 'play':
+        return <Play />;
+      case 'result':
+        return <p>結果</p>;
+    }
+  };
   return (
     <>
       <Global styles={globalStyle} />
       <Layout>
-        <playScreen.Provider value={[playState, setPlayState]}>
-          {playState === 'start' ? (
-            <>
-              <Start />
-            </>
-          ) : playState === 'play' ? (
-            <>
-              <Play />
-            </>
-          ) : (
-            playState ===
-            'result'(
-              <>
-                <p>結果</p>
-              </>,
-            )
-          )}
-        </playScreen.Provider>
+        <playScreen.Provider value={[playState, setPlayState]}>{screen(playState)}</playScreen.Provider>
       </Layout>
     </>
   );
