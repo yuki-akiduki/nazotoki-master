@@ -10,7 +10,7 @@ export default function End({ setAnswerInput }) {
     setAnswerInput(true);
     setTimeRunning(false);
     setTimeout(() => {
-      setState('start');
+      setState('result');
     }, 3000);
   }, []);
 

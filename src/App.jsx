@@ -1,8 +1,9 @@
 import { css, Global } from '@emotion/react';
-import Start from './components/Start/Start';
-import Layout from './layout/Layout';
 import { useState, createContext } from 'react';
-import Play from './components/play/Play';
+import Layout from './layout/Layout';
+import Start from './components/Start/Start';
+import Play from './components/Play/Play';
+import Result from './components/Result/ResultScreen';
 export const playScreen = createContext();
 export const timer = createContext();
 export const timeRunning = createContext();
@@ -20,7 +21,7 @@ function App() {
       case 'play':
         return <Play />;
       case 'result':
-        return <p>結果</p>;
+        return <Result />;
     }
   };
   return (
