@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { useState, useContext, useEffect } from 'react';
 import { gameStatus } from './Play';
-export default function Ready() {
+export default function Intro() {
   const [showReady, setShowReady] = useState(true);
   const [showGo, setShowGo] = useState(false);
 

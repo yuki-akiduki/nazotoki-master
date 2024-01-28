@@ -1,5 +1,5 @@
 import { createContext, useState } from 'react';
-import Ready from './Intro';
+import Intro from './Intro';
 import Timer from './Timer';
 import Game from './Game';
 export const gameStatus = createContext(false);
@@ -16,7 +16,7 @@ export default function Play() {
             <Game />
           </>
         ) : (
-          <Ready />
+          <Intro />
         )}
       </gameStatus.Provider>
     </>
