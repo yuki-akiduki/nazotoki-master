@@ -1,15 +1,20 @@
 import { useContext } from 'react';
-import { playScreen } from '../../App';
+import { playScreen, timer, timeRunning } from '../../App';
 
 export default function StartButton({ buttonStyle }) {
   const [, setState] = useContext(playScreen);
-  // ゲーム画面表示の更新
-  const handle = () => {
+  const [, setTime] = useContext(timer);
+  const [, setIsRunning] = useContext(timeRunning);
+
+  // ゲーム画面表示とタイマーのリセット
+  const init = () => {
     setState('play');
+    setTime(0);
+    setIsRunning(true);
   };
 
   return (
-    <button onClick={handle} css={buttonStyle}>
+    <button onClick={init} css={buttonStyle}>
       スタート
     </button>
   );

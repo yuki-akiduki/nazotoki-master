@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { timer, timeRunning } from '../../App';
 export default function Timer() {
   const [time, setTime] = useContext(timer);
-  const [isRunning, setIsRunning] = useContext(timeRunning);
+  const [isRunning] = useContext(timeRunning);
 
   useEffect(() => {
     // タイマー処理
