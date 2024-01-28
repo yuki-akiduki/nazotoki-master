@@ -1,6 +1,6 @@
 import { createContext, useState } from 'react';
 import Intro from './Intro';
-import Timer from './Timer';
+import Stopwatch from './Stopwatch';
 import Game from './Game';
 export const gameStatus = createContext(false);
 
@@ -12,7 +12,7 @@ export default function Play() {
       <gameStatus.Provider value={[gameState, setGameState]}>
         {gameState ? (
           <>
-            <Timer />
+            <Stopwatch />
             <Game />
           </>
         ) : (
