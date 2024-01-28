@@ -1,49 +1,40 @@
 import React, { useEffect, useState } from 'react';
 import { css } from '@emotion/react';
+import { quizListArr } from '../../utils/QuizList';
+import PlayButton from './PlayButton';
+import AnswerJudge from './AnswerJudge';
+import End from './End';
 
-// クイズリスト
-const quizList = [
-  {
-    image: 'img01.png',
-    answer: 'みかん',
-  },
-  {
-    image: 'img02.png',
-    answer: 'りんご',
-  },
-  {
-    image: 'img03.png',
-    answer: 'すいか',
-  },
-];
-
-// リストをシャッフルして、出題順を決める
-const shuffleQuizArr = [...quizList];
-const quizTotal = shuffleQuizArr.length;
-for (let i = quizTotal - 1; i >= 0; i--) {
-  const randomIndex = Math.floor(Math.random() * (i + 1));
-  [shuffleQuizArr[i], shuffleQuizArr[randomIndex]] = [shuffleQuizArr[randomIndex], shuffleQuizArr[i]];
-}
-console.log(shuffleQuizArr);
 export default function Game() {
   const [quizNum, setQuizNum] = useState(0);
   const [correcte, setCorrect] = useState(0);
   const [answer, setAnswer] = useState('');
-  const [answerFiled, setAnswerFiled] = useState(false);
+  const [answerInput, setAnswerInput] = useState(false);
+  const [answerStatus, setSAnswerStatus] = useState({
+    status: '',
+    text: '',
+  });
+
+  const [end, setEnd] = useState(false);
+
+  // 正解数の設定
+  const correcteLimit = 1;
 
   // 正誤判定
   const answerHandler = () => {
-    if (shuffleQuizArr[quizNum].answer === answer) {
+    if (quizListArr[quizNum].answer === answer) {
       setQuizNum((prev) => ++prev);
       setCorrect((prev) => ++prev);
     } else {
       // 不正解時は3秒ロス
       return new Promise((resolve) => {
-        setAnswerFiled(true);
+        setAnswerInput(true);
+        setSAnswerStatus({ status: 'incorrect', text: '不正解！' });
         resolve();
       }).then(() => {
         setTimeout(() => {
-          setAnswerFiled(false);
+          setAnswerInput();
+          setSAnswerStatus({ status: '', text: '' });
         }, 3000);
       });
     }
@@ -51,31 +42,35 @@ export default function Game() {
 
   // 問題をパス
   const passHandeler = async () => {
-    setAnswerFiled(true);
+    setAnswerInput(true);
+    setSAnswerStatus({ status: 'pass', text: 'パス' });
+
     await new Promise((resolve) => setTimeout(resolve, 1000));
-    setAnswerFiled(false);
+    setAnswerInput(false);
+    setSAnswerStatus({ status: '', text: '' });
     setQuizNum((prev) => ++prev);
   };
 
   // 正解時、inputを空にする処理
   useEffect(() => {
     setAnswer('');
-    if (correcte === 2) {
-      setAnswerFiled(true);
-    }
+    // if (correcte === correcteLimit) {
+    //   setAnswerInput(true);
+    //   setEnd(true);
+    // }
   }, [correcte]);
 
   return (
     <>
-      <img src={`./img/quiz/${shuffleQuizArr[quizNum].image}`} alt="" />
-      <button onClick={answerHandler} disabled={answerFiled}>
-        ボタン
-      </button>
-      <button onClick={passHandeler} disabled={answerFiled}>
-        パス
-      </button>
-      <input type="text" onChange={(e) => setAnswer(e.target.value)} value={answer} disabled={answerFiled} css={inputText} />
-      <p>{quizNum}</p>
+      <AnswerJudge answerStatus={answerStatus} />
+
+      <img src={`./img/quiz/${quizListArr[quizNum].image}`} alt="" />
+      <PlayButton category={`解答！`} handler={answerHandler} disabled={answerInput} />
+      <PlayButton category={`パス`} handler={passHandeler} disabled={answerInput} />
+
+      <input type="text" onChange={(e) => setAnswer(e.target.value)} value={answer} disabled={answerInput} css={inputText} />
+      <p>{correcte} / 7</p>
+      {correcte === correcteLimit ? <End setAnswerInput={setAnswerInput} /> : <></>}
     </>
   );
 }
