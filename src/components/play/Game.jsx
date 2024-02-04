@@ -15,8 +15,6 @@ export default function Game() {
     text: '',
   });
 
-  const [end, setEnd] = useState(false);
-
   // 正解数の設定
   const correcteLimit = 1;
 
@@ -54,22 +52,23 @@ export default function Game() {
   // 正解時、inputを空にする処理
   useEffect(() => {
     setAnswer('');
-    // if (correcte === correcteLimit) {
-    //   setAnswerInput(true);
-    //   setEnd(true);
-    // }
   }, [correcte]);
 
   return (
     <>
       <AnswerJudge answerStatus={answerStatus} />
 
-      <img src={`./img/quiz/${quizListArr[quizNum].image}`} alt="" />
-      <PlayButton category={`解答！`} handler={answerHandler} disabled={answerInput} />
-      <PlayButton category={`パス`} handler={passHandeler} disabled={answerInput} />
+      <div css={quizImg}>
+        <img src={`./img/quiz/${quizListArr[quizNum].image}`} alt="" />
+      </div>
 
-      <input type="text" onChange={(e) => setAnswer(e.target.value)} value={answer} disabled={answerInput} css={inputText} />
-      <p>{correcte} / 7</p>
+      <div css={field}>
+        <input type="text" onChange={(e) => setAnswer(e.target.value)} value={answer} disabled={answerInput} css={inputText} />
+        <PlayButton category={`解答！`} handler={answerHandler} disabled={answerInput} />
+        <PlayButton category={`パス`} handler={passHandeler} disabled={answerInput} />
+
+        <p>{correcte} / 7</p>
+      </div>
       {correcte === correcteLimit ? <End setAnswerInput={setAnswerInput} /> : <></>}
     </>
   );
@@ -79,4 +78,18 @@ const inputText = css`
   &:disabled {
     background: #000;
   }
+`;
+
+const quizImg = css`
+  max-width: 300px;
+  margin-top: 80px;
+  margin-right: auto;
+  margin-left: auto;
+`;
+
+const field = css`
+  max-width: 600px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 80px;
 `;

@@ -1,4 +1,5 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
+import { css } from '@emotion/react';
 import { timer, timeRunning } from '../../App';
 export default function Timer() {
   const [time, setTime] = useContext(timer);
@@ -24,7 +25,13 @@ export default function Timer() {
 
   return (
     <>
-      <div>{time}</div>
+      <div css={currentTime}>Time {time}</div>
     </>
   );
 }
+
+const currentTime = css`
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 24px;
+`;
