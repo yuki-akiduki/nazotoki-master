@@ -56,7 +56,13 @@ export default function Game() {
 
   return (
     <>
-      <AnswerJudge answerStatus={answerStatus} />
+      <div>
+        <AnswerJudge answerStatus={answerStatus} />
+        <div css={correcteInfo}>
+          <p css={correcteText}>正解数</p>
+          <p css={correcteTotal}>{correcte} / 7</p>
+        </div>
+      </div>
 
       <div css={quizImg}>
         <img src={`./img/quiz/${quizListArr[quizNum].image}`} alt="" />
@@ -64,9 +70,10 @@ export default function Game() {
 
       <div css={field}>
         <input type="text" onChange={(e) => setAnswer(e.target.value)} value={answer} disabled={answerInput} css={inputText} />
-        <PlayButton category={`解答！`} handler={answerHandler} disabled={answerInput} />
-        <PlayButton category={`パス`} handler={passHandeler} disabled={answerInput} />
-
+        <div css={answerButtons}>
+          <PlayButton category={`解答！`} handler={answerHandler} disabled={answerInput} cssType={'answerButton'} />
+          <PlayButton category={`パス`} handler={passHandeler} disabled={answerInput} cssType={'passButton'} />
+        </div>
         <p>{correcte} / 7</p>
       </div>
       {correcte === correcteLimit ? <End setAnswerInput={setAnswerInput} /> : <></>}
@@ -75,6 +82,13 @@ export default function Game() {
 }
 
 const inputText = css`
+  display: block;
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #000;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 4px;
   &:disabled {
     background: #000;
   }
@@ -91,5 +105,24 @@ const field = css`
   max-width: 600px;
   margin-right: auto;
   margin-left: auto;
-  margin-top: 80px;
+  margin-top: 16px;
+`;
+
+const correcteInfo = css`
+  margin-top: 16px;
+`;
+const correcteText = css`
+  font-size: 12px;
+`;
+
+const correcteTotal = css`
+  font-size: 24px;
+`;
+
+const answerButtons = css`
+  display: flex;
+  column-gap: 16px;
+  align-items: flex-end;
+  justify-content: center;
+  margin-top: 32px;
 `;
