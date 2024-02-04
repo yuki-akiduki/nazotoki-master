@@ -9,8 +9,7 @@ export default function Layout({ children }) {
 }
 
 const area = css`
-  padding-left: 24px;
-  padding-right: 24px;
+  padding: 24px;
   height: 100dvh;
   min-height: 800px;
 `;
