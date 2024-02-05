@@ -57,7 +57,7 @@ export default function Game() {
   return (
     <>
       <div>
-        <AnswerJudge answerStatus={answerStatus} />
+        {answerInput ? <AnswerJudge answerStatus={answerStatus} /> : <></>}
         <div css={correcteInfo}>
           <p css={correcteText}>正解数</p>
           <p css={correcteTotal}>{correcte} / 7</p>
